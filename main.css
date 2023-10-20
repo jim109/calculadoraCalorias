@@ -44,6 +44,13 @@ body::-webkit-scrollbar-thumb {
     display: none;
 }
 
+.custom-select {
+    border-radius: 5px;
+    padding: 0.35rem 0.75rem;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
 
 /* footer */
 .footer {

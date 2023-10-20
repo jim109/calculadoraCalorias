@@ -8,17 +8,21 @@ formularioCalculadora.addEventListener('submit', (e) => {
 });
 
 function calcularCalorias() {
-    const nombre = ''
-    const documento = 0
+    const nombre = document.querySelector('#nombre').value;
+    const tipoDocumento = document.querySelector('#tipoDocumento').value;
+    const documento = document.querySelector('#numeroDocumento').value;
     const edad = document.querySelector('#edad').value
     const peso = document.querySelector('#peso').value;
     const altura = document.querySelector('#altura').value;
     const actividad = document.querySelector('#actividad').value;
     const generoSeleccionado = document.querySelector('input[name="genero"]:checked').value;
 
-    console.log(!edad || !peso || !altura || !actividad);
+    const poblacion = edad < 60 ? edad < 30? "Joven" : "Adulto" : "Adulto Mayor"
+    console.log(poblacion);
 
-    if (!edad || !peso || !altura || !actividad) {
+    
+
+    if (!edad || !peso || !altura || !actividad || !nombre || !documento) {
         mostrarMensajeDeError("Por favor, rellena todos los campos");
         console.log("Por favor, rellena todos los campos");
        mostrarMensajeDeError();
@@ -27,22 +31,22 @@ function calcularCalorias() {
             const calorias = Math.floor(actividad *  (10 * peso) + (6.25 * altura) - (5 * edad) + 5);
             aparecerResultado()
             resultado.innerHTML = `            
-                <div class="card-body d-flex flex-column justify-content-center align-items-center w-100 h-100 my-3 shadow text-center">
-                    <h3 class="card-title">Calorias requeridas</h3>
-                    <div class="p-2">
-                        <input type="text" class="form-control rounded" value="${calorias}" readonly>
-                    </div>
-                </div>`
+            <div class="card-body d-flex flex-column justify-content-center align-items-center w-100 h-100 my-3 shadow text-center">
+                <h2>El paciente ${nombre}</h2>
+                <p>Identificado con ${tipoDocumento} No. ${documento}</p>
+                <span>Requiere un total de <strong>${calorias}</strong> kcal para el sostenimiento de su TBM</span>
+                <span>El grupo poblacional al que perteneces es: <strong>${poblacion}</strong></span>
+            </div>`
         
         }else if (generoSeleccionado === 'F') {
             const calorias = Math.floor(actividad *   (10 * peso) + (6.25 * altura) - (5 * edad) - 161);
             aparecerResultado()
             resultado.innerHTML = `
             <div class="card-body d-flex flex-column justify-content-center align-items-center w-100 h-100 my-3 shadow text-center">
-                <h3 class="card-title">Calorias requeridas</h3>
-                <div class="p-2">
-                <input type="text" class="form-control rounded" value="${calorias}" readonly>
-                </div>
+                <h2>El paciente ${nombre}</h2>
+                <p>Identificado con ${tipoDocumento} No. ${documento}</p>
+                <span>Requiere un total de <strong>${calorias}</strong> kcal para el sostenimiento de su TBM</span>
+                <span>El grupo poblacional al que perteneces es: <strong>${poblacion}</strong></span>
             </div>`
         }
     }
